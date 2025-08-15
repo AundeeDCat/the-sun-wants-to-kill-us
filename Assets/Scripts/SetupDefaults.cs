@@ -15,7 +15,7 @@ public class SetupDefaults : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.Return))//return is enter key not keypadEnter
         {
             StartMenu.SetActive(false);
             MainMenu.SetActive(true);
