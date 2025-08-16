@@ -15,7 +15,7 @@ public class UIChoices : MonoBehaviour
     private int numOfOptions = 3; //using the switch case
     private int selectedOpt;
     //calling another script
-    SetupDefaults Menu;
+    SetupDefaults Menu;//figure this out pls
     void Start()
     {
         //initialization: check!
