@@ -1,6 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+===SETUP===
+Include in a gameobject w/ audio source
+===Code call in reference===
+
+*/
 
 public class SoundEffectLibrary : MonoBehaviour
 {
@@ -15,7 +21,7 @@ public class SoundEffectLibrary : MonoBehaviour
     private void InitializeDictionary()
     {
         soundDictionary = new Dictionary<string, List<AudioClip>>();
-        foreach(SoundEffectGroup soundEffectGroup in soundEffectgroups)
+        foreach (SoundEffectGroup soundEffectGroup in soundEffectgroups)
         {
             soundDictionary[soundEffectGroup.name] = soundEffectGroup.clip;
         }
