@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SpawnerControls : MonoBehaviour
 {
-    [SerializeField] float spawnDelayMax = 3;
-    [SerializeField] float spawnDelayMin = 1;
 
     public Rigidbody spawned;
     [SerializeField] float spawnedSpeed = 3;

@@ -649,6 +649,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aaa6440f32a27e4fbfbff6eee2f1196, type: 3}
+--- !u!4 &113128308 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+  m_PrefabInstance: {fileID: 1868263147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &154398964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -878,7 +883,7 @@ Transform:
   m_GameObject: {fileID: 343259328}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -20, z: -10}
+  m_LocalPosition: {x: 0, y: -20, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1000,8 +1005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b23221d10f600c4192b5f3393ededc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelayMax: 3
-  spawnDelayMin: 1
   spawned: {fileID: 828027323}
   spawnedSpeed: 7.5
   spawnedLifetime: 10
@@ -1553,7 +1556,7 @@ GameObject:
   - component: {fileID: 681523529}
   m_Layer: 0
   m_Name: Sky Bounds
-  m_TagString: Sky
+  m_TagString: Storm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1634,7 +1637,7 @@ Transform:
   m_GameObject: {fileID: 699183192}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 15, y: 0, z: -7.5}
+  m_LocalPosition: {x: 7.5, y: 0, z: -7.5}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2357,7 +2360,7 @@ Transform:
   m_GameObject: {fileID: 1108520701}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 15, y: 0, z: 7.5}
+  m_LocalPosition: {x: 7.5, y: 0, z: 7.5}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2667,7 +2670,7 @@ GameObject:
   - component: {fileID: 1437071362}
   m_Layer: 0
   m_Name: Sky Bounds
-  m_TagString: Sky
+  m_TagString: Rain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2765,8 +2768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b23221d10f600c4192b5f3393ededc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelayMax: 3
-  spawnDelayMin: 1
   spawned: {fileID: 1909902601}
   spawnedSpeed: 3
   spawnedLifetime: 10
@@ -3234,7 +3235,7 @@ GameObject:
   - component: {fileID: 1851020415}
   m_Layer: 0
   m_Name: Sky Bounds
-  m_TagString: Sky
+  m_TagString: Feather
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3287,6 +3288,67 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: -0.5}
+--- !u!1001 &1868263147
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2135796697}
+    m_Modifications:
+    - target: {fileID: 2782838555895510123, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_Name
+      value: Platform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988462406782486477, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703007820500922911, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
+      propertyPath: PCscript
+      value: 
+      objectReference: {fileID: 4209823490110984649}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76321a83057ca6343bfe89dd5b7a91cb, type: 3}
 --- !u!1 &1884164967
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,11 +3791,12 @@ Transform:
   m_GameObject: {fileID: 2135796696}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: -5}
+  m_LocalPosition: {x: 0, y: -10, z: 2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 463868881}
+  - {fileID: 113128308}
   - {fileID: 45949848}
   - {fileID: 76788275}
   - {fileID: 1812050232}
@@ -3816,7 +3879,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6619642777729485769, guid: 3f6b90ab79362854683040ffbbb045f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.38
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 6619642777729485769, guid: 3f6b90ab79362854683040ffbbb045f0, type: 3}
       propertyPath: m_LocalPosition.y

@@ -11,9 +11,10 @@ public class WaterGunControls : MonoBehaviour
     float bulletSpeed = 25;
     float bulletLifetime = 3;
 
-    float shootCooldown = 0.5f;
-    int ammoAmount = 10;
-    int ammoLimit = 20;
+    float shootCooldownTime = 0.5f;
+    bool isCooldown = true;
+    static int ammoAmount = 10;
+    static int ammoLimit = 20;
 
 
     void Update()
@@ -42,7 +43,7 @@ public class WaterGunControls : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isCooldown && ammoAmount >= 1)
         {
             Rigidbody clone;
 
@@ -52,6 +53,11 @@ public class WaterGunControls : MonoBehaviour
 
             clone.linearVelocity = transform.TransformDirection(Vector3.right * bulletSpeed);
 
+            isCooldown = false;
+
+            ammoAmount -= 1;
+
+            StartCoroutine(ShootCooldown(shootCooldownTime));
             StartCoroutine(KillBullet(bulletLifetime, clone));
         }
     }
@@ -62,5 +68,17 @@ public class WaterGunControls : MonoBehaviour
         yield return new WaitForSeconds(time);
         Destroy(clone.gameObject);
 
+    }
+
+    private IEnumerator ShootCooldown(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isCooldown = true;
+    }
+
+    public static void ReloadAmmo()
+    {
+        if (ammoAmount < ammoLimit) ammoAmount += 1;
+        Debug.Log(ammoAmount);
     }
 }
