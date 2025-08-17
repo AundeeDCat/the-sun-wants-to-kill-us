@@ -1,15 +1,15 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class SettingsOption : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
-
-    public TextMeshProUGUI choice0, choice1, choice2, choice3;
-    public GameObject Arrow0, Arrow1, Arrow2, Arrow3, Main, settingsTab, SFX, BGM;
-    private int Options = 4;
+    public TextMeshProUGUI choice0, choice1, choice2, choice3, choice4;
+    public GameObject Arrow0, Arrow1, Arrow2, Arrow3, Arrow4, Menu, SFX, BGM;
+    private int Options = 5;
     private int selectedOpt;
+    //pause
+    public static bool gameIsPaused;
 
 
     void Start()
@@ -24,10 +24,13 @@ public class SettingsOption : MonoBehaviour
         choice1.color = new Color32(200, 236, 115, 120);
         choice2.color = new Color32(200, 236, 115, 120);
         choice3.color = new Color32(200, 236, 115, 120);
+        choice3.color = new Color32(200, 236, 115, 120);
         Arrow0.SetActive(true);
         Arrow1.SetActive(false);
         Arrow2.SetActive(false);
         Arrow3.SetActive(false);
+        SFX.SetActive(false);
+        BGM.SetActive(false);
     }
 
     void Update()
@@ -42,17 +45,18 @@ public class SettingsOption : MonoBehaviour
             SoundEffectManager.Play("Down");
             InputKeysDown();
         }
-        if (Input.GetKeyDown(KeyCode.Return)){
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
             SoundEffectManager.Play("Tap");
             InputKeysEnter();
         }
-        if (Input.GetKeyDown(KeyCode.Escape)){
-            Main.SetActive(true);
-            Arrow2.SetActive(true);
-            settingsTab.SetActive(false);
-            gameObject.GetComponent<SettingsOption>().enabled = false;
-            gameObject.GetComponent<UIChoices>().enabled = true;
-            if(SFX.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Menu.activeSelf)
+            {
+                Menu.SetActive(false);
+            }
+            if (SFX.activeSelf)
             {
                 SFX.SetActive(false);
             }
@@ -60,6 +64,23 @@ public class SettingsOption : MonoBehaviour
             {
                 BGM.SetActive(false);
             }
+            gameIsPaused = !gameIsPaused;
+            SoundEffectManager.Play("Pause");
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        if (gameIsPaused)
+        {
+            Time.timeScale = 0f;
+            Menu.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Menu.SetActive(false);
         }
     }
 
@@ -75,6 +96,7 @@ public class SettingsOption : MonoBehaviour
         choice1.color = new Color32(200, 236, 115, 120);
         choice2.color = new Color32(200, 236, 115, 120);
         choice3.color = new Color32(200, 236, 115, 120);
+        choice4.color = new Color32(200, 236, 115, 120);
         switch (selectedOpt)
         {
             case 0:
@@ -83,6 +105,7 @@ public class SettingsOption : MonoBehaviour
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(false);
+                Arrow4.SetActive(false);
                 break;
             case 1:
                 choice1.color = new Color32(255, 253, 137, 255);
@@ -90,6 +113,7 @@ public class SettingsOption : MonoBehaviour
                 Arrow1.SetActive(true);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(false);
+                Arrow4.SetActive(false);
                 break;
             case 2:
                 choice2.color = new Color32(255, 253, 137, 255);
@@ -97,6 +121,7 @@ public class SettingsOption : MonoBehaviour
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(true);
                 Arrow3.SetActive(false);
+                Arrow4.SetActive(false);
                 break;
             case 3:
                 choice3.color = new Color32(255, 253, 137, 255);
@@ -104,14 +129,23 @@ public class SettingsOption : MonoBehaviour
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(true);
+                Arrow4.SetActive(false);
+                break;
+            case 4:
+                choice4.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(false);
+                Arrow1.SetActive(false);
+                Arrow2.SetActive(false);
+                Arrow3.SetActive(false);
+                Arrow4.SetActive(true);
                 break;
         }
     }
 
     public void InputKeysDown()
     {
-        selectedOpt -= 1;
-        if (selectedOpt < 0) //If at end of list go back to top
+        selectedOpt -= 0;
+        if (selectedOpt < 1) //If at end of list go back to top
         {
             selectedOpt = Options;
         }
@@ -119,6 +153,7 @@ public class SettingsOption : MonoBehaviour
         choice1.color = new Color32(200, 236, 115, 120);
         choice2.color = new Color32(200, 236, 115, 120);
         choice3.color = new Color32(200, 236, 115, 120);
+        choice4.color = new Color32(200, 236, 115, 120);
         switch (selectedOpt)
         {
             case 0:
@@ -127,6 +162,7 @@ public class SettingsOption : MonoBehaviour
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(false);
+                Arrow4.SetActive(false);
                 break;
             case 1:
                 choice1.color = new Color32(255, 253, 137, 255);
@@ -134,6 +170,7 @@ public class SettingsOption : MonoBehaviour
                 Arrow1.SetActive(true);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(false);
+                Arrow4.SetActive(false);
                 break;
             case 2:
                 choice2.color = new Color32(255, 253, 137, 255);
@@ -141,6 +178,7 @@ public class SettingsOption : MonoBehaviour
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(true);
                 Arrow3.SetActive(false);
+                Arrow4.SetActive(false);
                 break;
             case 3:
                 choice3.color = new Color32(255, 253, 137, 255);
@@ -148,6 +186,15 @@ public class SettingsOption : MonoBehaviour
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(true);
+                Arrow4.SetActive(false);
+                break;
+            case 4:
+                choice4.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(false);
+                Arrow1.SetActive(false);
+                Arrow2.SetActive(false);
+                Arrow3.SetActive(false);
+                Arrow4.SetActive(true);
                 break;
         }
     }
@@ -156,23 +203,27 @@ public class SettingsOption : MonoBehaviour
     {
         switch (selectedOpt)
         {
-            case 0:
-                SceneManager.LoadScene("Credit Page Scene");
+            case 0://quit
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                SoundEffectManager.Play("Exit");
+                Application.Quit();
                 break;
-            case 1:
+            case 1://menu
+                new WaitForSeconds(1);
+                SceneManager.LoadScene("Main Menu");
+                break;
+            case 2://BGM
                 BGM.SetActive(true);
                 SFX.SetActive(false);
                 break;
-            case 2:
+            case 3://SFX
                 BGM.SetActive(false);
                 SFX.SetActive(true);
                 break;
-            case 3:
-                Main.SetActive(true);
-                Arrow2.SetActive(true);
-                settingsTab.SetActive(false);
-                gameObject.GetComponent<UIChoices>().enabled = true;
-                gameObject.GetComponent<SettingsOption>().enabled = false;
+            case 4://Continue
+                Menu.SetActive(false);
                 break;
         }
     }

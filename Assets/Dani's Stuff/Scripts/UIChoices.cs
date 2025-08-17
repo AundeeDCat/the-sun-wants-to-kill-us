@@ -31,8 +31,6 @@ public class UIChoices : MonoBehaviour
         Arrow2.SetActive(false);
         Arrow3.SetActive(true);
         settingsTab.SetActive(false);
-        //Script
-        gameObject.GetComponent<SetupDefaults>().enabled = false;
     }
 
     void Update()
@@ -143,6 +141,7 @@ public class UIChoices : MonoBehaviour
                 break;
             case 3:
                 //fade wait for one second
+                new WaitForSeconds(1);
                 SceneManager.LoadScene("SampleScene");
                 break;
         }
