@@ -36,6 +36,11 @@ public class PlatformEffects : MonoBehaviour
             exitedFeather = false;
             StartCoroutine(FeatherFade(featherFadeTime, other));
         }
+
+        if (this.gameObject.CompareTag("Ground") && other.CompareTag("Player"))
+        {
+            SpawnerControls.inGround = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -50,6 +55,11 @@ public class PlatformEffects : MonoBehaviour
         if (this.gameObject.CompareTag("Feather") && other.CompareTag("Player"))
         {
             exitedFeather = true;
+        }
+
+        if (this.gameObject.CompareTag("Ground") && other.CompareTag("Player"))
+        {
+            SpawnerControls.inGround = false;
         }
     }
 
