@@ -1,16 +1,28 @@
 using UnityEngine;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class WaterGunControls : MonoBehaviour
 {
     public Camera mainCam;
-    public float rotationSpeed = 10f;
+    float rotationSpeed = 10f;
+
+    public Rigidbody bullet;
+    float bulletSpeed = 25;
+    float bulletLifetime = 3;
+
+    float shootCooldown = 0.5f;
+    int ammoAmount = 10;
+    int ammoLimit = 20;
+
 
     void Update()
     {
-        WaterGun();
+        Aim();
+        Shoot();
     }
 
-    void WaterGun()
+    void Aim()
     {
         Vector3 mousePos = Input.mousePosition;
 
@@ -26,8 +38,29 @@ public class WaterGunControls : MonoBehaviour
 
         Quaternion targetRot = Quaternion.Euler(90f, 0f, angle);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+    }
 
-        Debug.Log(direction);
+    void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Rigidbody clone;
+
+            clone = Instantiate(bullet, transform.position, this.gameObject.transform.rotation);
+
+            clone.gameObject.SetActive(true);
+
+            clone.linearVelocity = transform.TransformDirection(Vector3.right * bulletSpeed);
+
+            StartCoroutine(KillBullet(bulletLifetime, clone));
+        }
+    }
+
+
+    private IEnumerator KillBullet(float time, Rigidbody clone)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(clone.gameObject);
 
     }
 }
