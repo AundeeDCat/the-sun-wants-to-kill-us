@@ -1,15 +1,15 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SettingsOption : MonoBehaviour
 {
 
     public TextMeshProUGUI choice1, choice2, choice3;
-    public GameObject Arrow1, Arrow2, Arrow3, Main, settingsTab;
-
+    public GameObject Arrow1, Arrow2, Arrow3, Main, settingsTab, SFX, BGM;
     private int Options = 3;
     private int selectedOpt;
+
 
     void Start()
     {
@@ -31,23 +31,32 @@ public class SettingsOption : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Debug.Log("Up up, its out moment, charottt");//Comment if no issues;
             SoundEffectManager.Play("Up");
             InputKeysUp();
         }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Debug.Log("Bro Stop Spamming");
             SoundEffectManager.Play("Down");
             InputKeysDown();
         }
-        //Enter
+        if (Input.GetKeyDown(KeyCode.Return)){
+            SoundEffectManager.Play("Tap");
+            InputKeysEnter();
+        }
         if (Input.GetKeyDown(KeyCode.Escape)){
             Main.SetActive(true);
             Arrow2.SetActive(true);
             settingsTab.SetActive(false);
-            gameObject.GetComponent<SettingsOption>().enabled = false;//Activates script
+            gameObject.GetComponent<SettingsOption>().enabled = false;
             gameObject.GetComponent<UIChoices>().enabled = true;
+            if(SFX.activeSelf)
+            {
+                SFX.SetActive(false);
+            }
+            if (BGM.activeSelf)
+            {
+                BGM.SetActive(false);
+            }
         }
     }
 
@@ -62,10 +71,10 @@ public class SettingsOption : MonoBehaviour
         choice1.color = new Color32(200, 236, 115, 120);
         choice2.color = new Color32(200, 236, 115, 120);
         choice3.color = new Color32(200, 236, 115, 120);
-        switch (selectedOpt) //Set the visual indicator for which option you are on.
+        switch (selectedOpt)
         {
             case 1:
-                choice1.color = new Color32(255, 253, 137, 255);//RGB indicator, Currently white
+                choice1.color = new Color32(255, 253, 137, 255);
                 Arrow1.SetActive(true);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(false);
@@ -93,26 +102,26 @@ public class SettingsOption : MonoBehaviour
             selectedOpt = Options;
         }
 
-        choice1.color = new Color32(0, 0, 0, 255); //Use RGB indicator
-        choice2.color = new Color32(0, 0, 0, 255);
-        choice3.color = new Color32(0, 0, 0, 255);
+        choice1.color = new Color32(200, 236, 115, 120);
+        choice2.color = new Color32(200, 236, 115, 120);
+        choice3.color = new Color32(200, 236, 115, 120);
 
         switch (selectedOpt)
         {
             case 1:
-                choice1.color = new Color32(255, 255, 255, 255);
+                choice1.color = new Color32(255, 253, 137, 255);
                 Arrow1.SetActive(true);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(false);
                 break;
             case 2:
-                choice2.color = new Color32(255, 255, 255, 255);
+                choice2.color = new Color32(255, 253, 137, 255);
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(true);
                 Arrow3.SetActive(false);
                 break;
             case 3:
-                choice3.color = new Color32(255, 255, 255, 255);
+                choice3.color = new Color32(255, 253, 137, 255);
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(true);
@@ -125,10 +134,10 @@ public class SettingsOption : MonoBehaviour
         switch (selectedOpt)
         {
             case 1:
-                //Effect
+                BGM.SetActive(true);
                 break;
             case 2:
-                //Music
+                SFX.SetActive(true);
                 break;
             case 3:
                 Main.SetActive(false);

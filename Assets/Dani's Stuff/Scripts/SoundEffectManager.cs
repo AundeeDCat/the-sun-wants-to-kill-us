@@ -11,7 +11,8 @@ public class SoundEffectManager : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
     //Input Variables
     public float step = 0.1f;
-
+    //gameobject
+    public GameObject sfx;
     private void Awake()
     {
         //instance call
@@ -45,15 +46,16 @@ public class SoundEffectManager : MonoBehaviour
     void Update()
     {
         //input ctrl
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (sfx.activeSelf)
         {
-            sfxSlider.value += step;
-            Debug.Log("Volume key up, sleepy");
-        }
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            sfxSlider.value -= step;
-            Debug.Log("Volume key down, ay putik na build pa nga");
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                sfxSlider.value += step;
+            }
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                sfxSlider.value -= step;
+            }
         }
     }
 

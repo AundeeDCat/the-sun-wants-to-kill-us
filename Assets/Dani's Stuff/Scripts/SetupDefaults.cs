@@ -5,13 +5,15 @@ using UnityEngine;
 public class SetupDefaults : MonoBehaviour
 {
     //game objects deactivated on update
-    public GameObject StartMenu, MainMenu, Hovers;
+    public GameObject StartMenu, MainMenu, Hovers, SFX, BGM;
 
     void Start()
     {
         MainMenu.SetActive(false);
         StartMenu.SetActive(true);
-        Hovers.SetActive(false);
+        Hovers.SetActive(false); 
+        SFX.SetActive(false); 
+        BGM.SetActive(false);
         gameObject.GetComponent<UIChoices>().enabled = false;
         gameObject.GetComponent<SettingsOption>().enabled = false;
         MusicManager.Play("Main Menu");

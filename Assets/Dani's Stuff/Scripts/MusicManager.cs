@@ -9,6 +9,8 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     //Input Variables
     public float step = 0.1f;
+    //gameobject
+    public GameObject music;
 
     private void Awake()
     {
@@ -39,15 +41,19 @@ public class MusicManager : MonoBehaviour
     }
     void Update()
     {
-        //input ctrl
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+
+        if(music.activeSelf)
         {
-            musicSlider.value += step;
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                musicSlider.value += step;
+            }
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                musicSlider.value -= step;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            musicSlider.value -= step;
-        }
+        
     }
 
     public static void setVolume(float volume)

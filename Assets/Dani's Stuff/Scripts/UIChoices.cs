@@ -27,11 +27,9 @@ public class UIChoices : MonoBehaviour
         choice1.color = new Color32(37, 184, 100, 120);
         choice2.color = new Color32(37, 184, 100, 120);
         choice3.color = new Color32(52, 228, 61, 255);
-        //GameObjects true
-        Arrow1.SetActive(true);
-        //GameObjects false
+        Arrow1.SetActive(false);
         Arrow2.SetActive(false);
-        Arrow3.SetActive(false);
+        Arrow3.SetActive(true);
         settingsTab.SetActive(false);
         //Script
         gameObject.GetComponent<SetupDefaults>().enabled = false;
@@ -41,13 +39,11 @@ public class UIChoices : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Debug.Log("Up up, its out moment, charottt");//Comment if no issues;
             SoundEffectManager.Play("Up");
             InputKeysUp();
         }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Debug.Log("Bro Stop Spamming");
             SoundEffectManager.Play("Down");
             InputKeysDown();
         }
@@ -119,7 +115,7 @@ public class UIChoices : MonoBehaviour
                 Arrow3.SetActive(false);
                 break;
             case 3:
-                choice3.color = new Color32(252, 228, 61, 255);
+                choice3.color = new Color32(52, 228, 61, 255);
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(true);
