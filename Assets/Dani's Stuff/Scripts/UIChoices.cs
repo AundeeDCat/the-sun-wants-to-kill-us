@@ -10,7 +10,7 @@ public class UIChoices : MonoBehaviour
     //order of cells in unity, 3-2-1
 
     public TextMeshProUGUI choice1, choice2, choice3, settingsTab;
-    public GameObject Arrow1, Arrow2, Arrow3;
+    public GameObject Arrow1, Arrow2, Arrow3, Main;
     //privates
     private int numOfOptions = 3; //using the switch case
     private int selectedOpt;
@@ -127,10 +127,14 @@ public class UIChoices : MonoBehaviour
         Debug.Log("Ay Na Enter, Byeee" + selectedOpt);
         switch(selectedOpt){
             case 1:
-                //on exit
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                SoundEffectManager.Play("Exit");
+                Application.Quit();
                 break;
             case 2:
-                //either load mainmenu from another script or; manually set the the actives false
+                Main.SetActive(false);
                 break;
             case 3:
                 SceneManager.LoadScene("SampleScene");//needs to be on a bundle?
