@@ -3,7 +3,6 @@ using UnityEngine;
 public class BoundsColliders : MonoBehaviour
 {
     public PlayerControls PCscript;
-    public float platformLevel;
 
     void OnTriggerEnter(Collider other)
     {

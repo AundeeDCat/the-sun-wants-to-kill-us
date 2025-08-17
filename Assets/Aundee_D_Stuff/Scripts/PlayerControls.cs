@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -8,32 +9,33 @@ public class PlayerControls : MonoBehaviour
     public GameObject AoEpivot;
     public GameObject characterSprite;
 
-    int speed = 3;
 
-    bool isJumping;
-    int jumpHeight = 1;
-    float jumpTimer = 0;
-    float jumpTime = 1.5f;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        if (isStunned) StartCoroutine(ClearStun(stunDuration));
+
+        Movement();
+
+        Gravity();
+    }
+
 
     public bool northBounds;
     public bool southBounds;
     public bool westBounds;
     public bool eastBounds;
 
-    float gravityScale = 1f;
+    int speed = 3;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-
-    }
-
-    void Update()
-    {
-        Movement();
-
-        Gravity();
-    }
+    bool isJumping;
+    int jumpHeight = 1;
+    float jumpTimer = 0;
+    float jumpTime = 1.5f;
 
     void Movement()
     {
@@ -42,10 +44,10 @@ public class PlayerControls : MonoBehaviour
         if (!isJumping) // Walking
         {
             // Forward/back (Z axis)
-            if (Input.GetKey(KeyCode.W) && !northBounds)
+            if (Input.GetKey(KeyCode.W) && !northBounds && !isStunned)
                 velocity.z = 1;
 
-            else if (Input.GetKey(KeyCode.S) && !southBounds)
+            else if (Input.GetKey(KeyCode.S) && !southBounds && !isStunned)
                 velocity.z = -1;
 
             else
@@ -53,10 +55,10 @@ public class PlayerControls : MonoBehaviour
 
 
             // Left/right (X axis)
-            if (Input.GetKey(KeyCode.A) && !westBounds)
+            if (Input.GetKey(KeyCode.A) && !westBounds && !isStunned)
                 velocity.x = -1;
 
-            else if (Input.GetKey(KeyCode.D) && !eastBounds)
+            else if (Input.GetKey(KeyCode.D) && !eastBounds && !isStunned)
                 velocity.x = 1;
 
             else
@@ -102,8 +104,9 @@ public class PlayerControls : MonoBehaviour
             }
         }
 
-        // Normalize movement direction and apply speed
+        
         Vector3 horizontalVelocity = new Vector3(velocity.x, 0, velocity.z).normalized * speed;
+
         rb.linearVelocity = new Vector3(horizontalVelocity.x, rb.linearVelocity.y, horizontalVelocity.z);
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -128,4 +131,14 @@ public class PlayerControls : MonoBehaviour
         else rb.useGravity = false;
     }
 
+
+    [SerializeField] float stunDuration = 2.5f;
+    
+    public bool isStunned = false;
+
+    public IEnumerator ClearStun(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isStunned = false;
+    }
 }
