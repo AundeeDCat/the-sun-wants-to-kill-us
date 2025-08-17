@@ -24,9 +24,9 @@ public class UIChoices : MonoBehaviour
     {
         //initialization: check!
         selectedOpt = 1;
-        choice1.color = new Color32(37, 184, 100, 120);
+        choice1.color = new Color32(52, 228, 61, 255);
         choice2.color = new Color32(37, 184, 100, 120);
-        choice3.color = new Color32(52, 228, 61, 255);
+        choice3.color = new Color32(37, 184, 100, 120);
         Arrow1.SetActive(false);
         Arrow2.SetActive(false);
         Arrow3.SetActive(true);
@@ -143,7 +143,7 @@ public class UIChoices : MonoBehaviour
                 break;
             case 3:
                 //fade wait for one second
-                SceneManager.LoadScene("SampleScene");//needs to be on a bundle?
+                SceneManager.LoadScene("SampleScene");
                 break;
         }
     }

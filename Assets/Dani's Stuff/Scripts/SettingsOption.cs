@@ -1,13 +1,15 @@
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsOption : MonoBehaviour
 {
 
-    public TextMeshProUGUI choice1, choice2, choice3;
-    public GameObject Arrow1, Arrow2, Arrow3, Main, settingsTab, SFX, BGM;
-    private int Options = 3;
+    public TextMeshProUGUI choice0, choice1, choice2, choice3;
+    public GameObject Arrow0, Arrow1, Arrow2, Arrow3, Main, settingsTab, SFX, BGM;
+    private int Options = 4;
     private int selectedOpt;
 
 
@@ -19,12 +21,14 @@ public class SettingsOption : MonoBehaviour
         Yellow Green: 200,236,115
          */
         selectedOpt = 1;
-        choice1.color = new Color32(200, 236, 115, 120);
+        choice0.color = new Color32(255, 253, 137, 255);
+        choice1.color = new Color32(255, 253, 137, 255);
         choice2.color = new Color32(200, 236, 115, 120);
-        choice3.color = new Color32(255, 253, 137, 255);
+        choice3.color = new Color32(200, 236, 115, 120);
+        Arrow0.SetActive(true);
         Arrow1.SetActive(false);
         Arrow2.SetActive(false);
-        Arrow3.SetActive(true);
+        Arrow3.SetActive(false);
     }
 
     void Update()
@@ -68,25 +72,36 @@ public class SettingsOption : MonoBehaviour
         {
             selectedOpt = 1;
         }
+        choice0.color = new Color32(200, 236, 115, 120);
         choice1.color = new Color32(200, 236, 115, 120);
         choice2.color = new Color32(200, 236, 115, 120);
         choice3.color = new Color32(200, 236, 115, 120);
         switch (selectedOpt)
         {
+            case 0:
+                choice0.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(true);
+                Arrow1.SetActive(false);
+                Arrow2.SetActive(false);
+                Arrow3.SetActive(false);
+                break;
             case 1:
                 choice1.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(false);
                 Arrow1.SetActive(true);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(false);
                 break;
             case 2:
                 choice2.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(false);
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(true);
                 Arrow3.SetActive(false);
                 break;
             case 3:
                 choice3.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(false);
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(true);
@@ -101,27 +116,36 @@ public class SettingsOption : MonoBehaviour
         {
             selectedOpt = Options;
         }
-
+        choice0.color = new Color32(200, 236, 115, 120);
         choice1.color = new Color32(200, 236, 115, 120);
         choice2.color = new Color32(200, 236, 115, 120);
         choice3.color = new Color32(200, 236, 115, 120);
-
         switch (selectedOpt)
         {
+            case 0:
+                choice0.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(true);
+                Arrow1.SetActive(false);
+                Arrow2.SetActive(false);
+                Arrow3.SetActive(false);
+                break;
             case 1:
                 choice1.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(false);
                 Arrow1.SetActive(true);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(false);
                 break;
             case 2:
                 choice2.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(false);
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(true);
                 Arrow3.SetActive(false);
                 break;
             case 3:
                 choice3.color = new Color32(255, 253, 137, 255);
+                Arrow0.SetActive(false);
                 Arrow1.SetActive(false);
                 Arrow2.SetActive(false);
                 Arrow3.SetActive(true);
@@ -133,16 +157,21 @@ public class SettingsOption : MonoBehaviour
     {
         switch (selectedOpt)
         {
+            case 0:
+                SceneManager.LoadScene("Credit Page Scene");
+                break;
             case 1:
                 BGM.SetActive(true);
+                SFX.SetActive(false);
                 break;
             case 2:
+                BGM.SetActive(false);
                 SFX.SetActive(true);
                 break;
             case 3:
-                Main.SetActive(false);
-                Arrow2.SetActive(false);
-                settingsTab.SetActive(true);
+                Main.SetActive(true);
+                Arrow2.SetActive(true);
+                settingsTab.SetActive(false);
                 gameObject.GetComponent<UIChoices>().enabled = true;
                 gameObject.GetComponent<SettingsOption>().enabled = false;
                 break;
