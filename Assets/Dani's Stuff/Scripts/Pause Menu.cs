@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public TextMeshProUGUI choice0, choice1, choice2, choice3, choice4;
-    public GameObject Arrow0, Arrow1, Arrow2, Arrow3, Arrow4, Menu, SFX, BGM;
+    public GameObject Menu, SFX, BGM;
     private int Options = 5;
     private int selectedOpt;
     //pause
@@ -25,10 +25,6 @@ public class PauseMenu : MonoBehaviour
         choice2.color = new Color32(200, 236, 115, 120);
         choice3.color = new Color32(200, 236, 115, 120);
         choice3.color = new Color32(200, 236, 115, 120);
-        Arrow0.SetActive(true);
-        Arrow1.SetActive(false);
-        Arrow2.SetActive(false);
-        Arrow3.SetActive(false);
         SFX.SetActive(false);
         BGM.SetActive(false);
     }
@@ -101,50 +97,25 @@ public class PauseMenu : MonoBehaviour
         {
             case 0:
                 choice0.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(true);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(false);
-                Arrow4.SetActive(false);
                 break;
             case 1:
                 choice1.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(true);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(false);
-                Arrow4.SetActive(false);
                 break;
             case 2:
                 choice2.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(true);
-                Arrow3.SetActive(false);
-                Arrow4.SetActive(false);
                 break;
             case 3:
                 choice3.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(true);
-                Arrow4.SetActive(false);
                 break;
             case 4:
                 choice4.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(false);
-                Arrow4.SetActive(true);
                 break;
         }
     }
 
     public void InputKeysDown()
     {
-        selectedOpt -= 0;
+        selectedOpt -= 1;
         if (selectedOpt < 1) //If at end of list go back to top
         {
             selectedOpt = Options;
@@ -158,43 +129,18 @@ public class PauseMenu : MonoBehaviour
         {
             case 0:
                 choice0.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(true);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(false);
-                Arrow4.SetActive(false);
                 break;
             case 1:
                 choice1.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(true);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(false);
-                Arrow4.SetActive(false);
                 break;
             case 2:
                 choice2.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(true);
-                Arrow3.SetActive(false);
-                Arrow4.SetActive(false);
                 break;
             case 3:
                 choice3.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(true);
-                Arrow4.SetActive(false);
                 break;
             case 4:
                 choice4.color = new Color32(255, 253, 137, 255);
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(false);
-                Arrow4.SetActive(true);
                 break;
         }
     }
@@ -223,6 +169,7 @@ public class PauseMenu : MonoBehaviour
                 SFX.SetActive(true);
                 break;
             case 4://Continue
+                Time.timeScale = 1;
                 Menu.SetActive(false);
                 break;
         }
