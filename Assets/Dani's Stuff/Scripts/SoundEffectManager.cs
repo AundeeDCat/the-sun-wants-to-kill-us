@@ -1,18 +1,21 @@
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SoundEffectManager : MonoBehaviour
 {
     private static SoundEffectManager instance;
-
     private static AudioSource AudioSource;
     private static SoundEffectLibrary library;
     [SerializeField] private Slider sfxSlider;
+    //Input Variables
+    public float step = 0.1f;
 
     private void Awake()
     {
-        if(instance == null)
+        //instance call
+        if (instance == null)
         {
             instance = this;
             AudioSource = GetComponent<AudioSource>();
@@ -23,6 +26,7 @@ public class SoundEffectManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
 
     public static void Play(string soundName)
@@ -38,6 +42,21 @@ public class SoundEffectManager : MonoBehaviour
         sfxSlider.onValueChanged.AddListener(delegate { OnValueChanged(); });
     }
 
+    void Update()
+    {
+        //input ctrl
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            sfxSlider.value += step;
+            Debug.Log("Volume key up, sleepy");
+        }
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            sfxSlider.value -= step;
+            Debug.Log("Volume key down, ay putik na build pa nga");
+        }
+    }
+
     public static void SetVolume(float volume)
     {
         AudioSource.volume = volume;
@@ -47,4 +66,6 @@ public class SoundEffectManager : MonoBehaviour
     {
         SetVolume(sfxSlider.value);
     }
+    //Updates ScaleMove on Handler
+
 }

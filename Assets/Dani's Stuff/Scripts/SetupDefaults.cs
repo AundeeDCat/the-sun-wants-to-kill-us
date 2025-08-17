@@ -13,6 +13,8 @@ public class SetupDefaults : MonoBehaviour
         StartMenu.SetActive(true);
         Hovers.SetActive(false);
         gameObject.GetComponent<UIChoices>().enabled = false;
+        gameObject.GetComponent<SettingsOption>().enabled = false;
+        MusicManager.Play("Main Menu");
     }
 
     void Update()
@@ -29,7 +31,6 @@ public class SetupDefaults : MonoBehaviour
             Hovers.SetActive(true);
             //SFX
             SoundEffectManager.Play("Tap");
-            Time.timeScale = 0;
             gameObject.GetComponent<UIChoices>().enabled = true;//MainMenu UI script
         }
     }

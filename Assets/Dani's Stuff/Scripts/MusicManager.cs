@@ -4,16 +4,18 @@ using UnityEngine.UI;
 public class MusicManager : MonoBehaviour
 {
     private static  MusicManager instance;
-    private AudioSource audioSource;
-    public AudioClip backgroundMusic;
+    private static AudioSource audioSource;
+    private static MusicLibrary library;
     [SerializeField] private Slider musicSlider;
+    //Input Variables
+    public float step = 0.1f;
 
     private void Awake()
     {
         if (instance == null)
         {
-            instance = this;
             audioSource = GetComponent<AudioSource>();
+            library = GetComponent<MusicLibrary>();
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -22,38 +24,55 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    public static void Play(string soundName)
+    {
+        AudioClip audioClip = library.GetRandomClip(soundName);
+        if (audioClip != null)
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
+    }
+
     void Start()
     {
-        if(backgroundMusic != null)
-        {
-            PlayBackgroundMusic(false, backgroundMusic);
-        }
         musicSlider.onValueChanged.AddListener(delegate { setVolume(musicSlider.value); });
+    }
+    void Update()
+    {
+        //input ctrl
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            musicSlider.value += step;
+        }
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            musicSlider.value -= step;
+        }
     }
 
     public static void setVolume(float volume)
     {
-        instance.audioSource.volume = volume;
+        audioSource.volume = volume;
     }
 
     public static void PlayBackgroundMusic(bool resetSong, AudioClip audioClip = null)
     {
         if(audioClip !=  null)
         {
-            instance.audioSource.clip = audioClip;
+            audioSource.clip = audioClip;
         }
-        if(instance.audioSource.clip != null)
+        if(audioSource.clip != null)
         {
             if (resetSong)
             {
-                instance.audioSource.Stop();
+                audioSource.Stop();
             }
-            instance.audioSource.Play();
+            audioSource.Play();
         }
     }
 
     public static void PauseBackgroundMusic()
     {
-        instance.audioSource.Pause();
+        audioSource.Pause();
     }
 }

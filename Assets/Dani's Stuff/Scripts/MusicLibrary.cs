@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class SoundEffectLibrary : MonoBehaviour
+public class MusicLibrary : MonoBehaviour
 {
-    [SerializeField] private SoundEffectGroup[] soundEffectgroups;
-    private Dictionary<string, List<AudioClip>> soundDictionary;
+    [SerializeField] private MusicGroup[] MusicGroups;
+    private Dictionary<string, List<AudioClip>> MusicDictionary;
 
     private void Awake()
     {
@@ -15,18 +14,18 @@ public class SoundEffectLibrary : MonoBehaviour
 
     private void InitializeDictionary()
     {
-        soundDictionary = new Dictionary<string, List<AudioClip>>();
-        foreach (SoundEffectGroup soundEffectGroup in soundEffectgroups)
+        MusicDictionary = new Dictionary<string, List<AudioClip>>();
+        foreach (MusicGroup soundEffectGroup in MusicGroups)
         {
-            soundDictionary[soundEffectGroup.name] = soundEffectGroup.clip;
+            MusicDictionary[soundEffectGroup.name] = soundEffectGroup.clip;
         }
     }
 
     public AudioClip GetRandomClip(String name)
     {
-        if (soundDictionary.ContainsKey(name))
+        if (MusicDictionary.ContainsKey(name))
         {
-            List<AudioClip> audioClips = soundDictionary[name];
+            List<AudioClip> audioClips = MusicDictionary[name];
             if (audioClips.Count > 0)
             {
                 return audioClips[UnityEngine.Random.Range(0, audioClips.Count)];
@@ -37,7 +36,7 @@ public class SoundEffectLibrary : MonoBehaviour
 }
 
 [System.Serializable]
-public struct SoundEffectGroup
+public struct MusicGroup
 {
     public string name;
     public List<AudioClip> clip;
