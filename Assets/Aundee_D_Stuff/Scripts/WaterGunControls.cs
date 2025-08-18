@@ -11,9 +11,6 @@ public class WaterGunControls : MonoBehaviour
     float bulletSpeed = 25;
     float bulletLifetime = 3;
 
-    float shootCooldown = 0.5f;
-    int ammoAmount = 10;
-    int ammoLimit = 20;
     float shootCooldownTime = 0.5f;
     bool isCooldown = true;
     static int ammoAmount = 10;
@@ -46,7 +43,6 @@ public class WaterGunControls : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0))
         if (Input.GetMouseButtonDown(0) && isCooldown && ammoAmount >= 1)
         {
             Rigidbody clone;

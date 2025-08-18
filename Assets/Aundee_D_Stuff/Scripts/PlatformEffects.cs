@@ -31,7 +31,6 @@ public class PlatformEffects : MonoBehaviour
             SpawnerControls.inCosmos = true;
         }
 
-        if (this.gameObject.CompareTag("Sky") && other.CompareTag("Player"))
         if (this.gameObject.CompareTag("Feather") && other.CompareTag("Player"))
         {
             exitedFeather = false;
@@ -52,8 +51,6 @@ public class PlatformEffects : MonoBehaviour
 
             SpawnerControls.inCosmos = false;
         }
-        
-        if (this.gameObject.name == "Sky" && other.CompareTag("Player"))
 
         if (this.gameObject.CompareTag("Feather") && other.CompareTag("Player"))
         {

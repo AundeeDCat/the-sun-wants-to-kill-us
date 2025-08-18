@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class SpawnerControls : MonoBehaviour
 {
-    [SerializeField] float spawnDelayMax = 3;
-    [SerializeField] float spawnDelayMin = 1;
 
-    public Rigidbody spawned;
     public Rigidbody spawnedTargeter;
     public GameObject spawnedCluster;
     [SerializeField] float spawnedSpeed = 3;
     [SerializeField] float spawnedLifetime = 5f;
     [SerializeField] float spawnLimit = 5;
-
-    public bool isSpawning = false;
     [SerializeField] bool isSpawning = false;
 
     public bool isCozmosSpawner;
@@ -27,14 +22,12 @@ public class SpawnerControls : MonoBehaviour
 
     void Update()
     {
-        if (isCozmosSpawner && inCosmos) SpawnItem();
         if (isCozmosSpawner && inCosmos) SpawnTargetingItem();
 
         if (isGroundSpawner && inGround && !isSpawning && GameObject.FindGameObjectsWithTag(this.gameObject.name + " Spawned").Count() == 1)
             StartCoroutine(SpawnClusterItem(spawnedSpeed));
     }
 
-    public void SpawnItem()
     public void SpawnTargetingItem()
     {
 
@@ -48,7 +41,6 @@ public class SpawnerControls : MonoBehaviour
 
             if ((launchSite.x > 10 || launchSite.x < -10) && (launchSite.z > 5 || launchSite.z < 5))
             {
-                clone = Instantiate(spawned, new Vector3(-50, 0, 0), Quaternion.Euler(90, 0, 0));
                 clone = Instantiate(spawnedTargeter, new Vector3(-50, 0, 0), Quaternion.Euler(90, 0, 0));
 
                 clone.transform.localPosition = launchSite;
@@ -57,14 +49,12 @@ public class SpawnerControls : MonoBehaviour
 
                 clone.linearVelocity = (this.transform.position - launchSite).normalized * spawnedSpeed;
 
-                StartCoroutine(KillSpawned(spawnedLifetime, clone));
                 StartCoroutine(KillSpawnedTargeter(spawnedLifetime, clone));
             }
             
         }
     }
 
-    private IEnumerator KillSpawned(float time, Rigidbody clone)
     IEnumerator SpawnClusterItem(float time)
     {
         isSpawning = true;
