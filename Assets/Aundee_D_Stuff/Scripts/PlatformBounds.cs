@@ -20,6 +20,14 @@ public class BoundsColliders : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("BoundBox"))
+        {
+            SetBoundState(other.name, false);
+        }
+    }
+
     void SetBoundState(string boundName, bool state)
     {
         switch (boundName)
