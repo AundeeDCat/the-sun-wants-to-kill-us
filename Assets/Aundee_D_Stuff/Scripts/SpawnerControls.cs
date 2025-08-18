@@ -5,30 +5,24 @@ using UnityEngine;
 public class SpawnerControls : MonoBehaviour
 {
 
-    public Rigidbody spawnedTargeter;
-    public GameObject spawnedCluster;
+    public Rigidbody spawned;
     [SerializeField] float spawnedSpeed = 3;
     [SerializeField] float spawnedLifetime = 5f;
     [SerializeField] float spawnLimit = 5;
-    [SerializeField] bool isSpawning = false;
+
+    public bool isSpawning = false;
 
     public bool isCozmosSpawner;
     public static bool inCosmos;
-
-    public bool isGroundSpawner;
-    public static bool inGround;
 
     Vector3 launchSite = new Vector3(15, 0, 0);
 
     void Update()
     {
-        if (isCozmosSpawner && inCosmos) SpawnTargetingItem();
-
-        if (isGroundSpawner && inGround && !isSpawning && GameObject.FindGameObjectsWithTag(this.gameObject.name + " Spawned").Count() == 1)
-            StartCoroutine(SpawnClusterItem(spawnedSpeed));
+        if (isCozmosSpawner && inCosmos) SpawnItem();
     }
 
-    public void SpawnTargetingItem()
+    public void SpawnItem()
     {
 
         if (GameObject.FindGameObjectsWithTag(this.gameObject.name + " Spawned").Count() <= spawnLimit)
@@ -41,7 +35,7 @@ public class SpawnerControls : MonoBehaviour
 
             if ((launchSite.x > 10 || launchSite.x < -10) && (launchSite.z > 5 || launchSite.z < 5))
             {
-                clone = Instantiate(spawnedTargeter, new Vector3(-50, 0, 0), Quaternion.Euler(90, 0, 0));
+                clone = Instantiate(spawned, new Vector3(-50, 0, 0), Quaternion.Euler(90, 0, 0));
 
                 clone.transform.localPosition = launchSite;
 
@@ -49,46 +43,13 @@ public class SpawnerControls : MonoBehaviour
 
                 clone.linearVelocity = (this.transform.position - launchSite).normalized * spawnedSpeed;
 
-                StartCoroutine(KillSpawnedTargeter(spawnedLifetime, clone));
+                StartCoroutine(KillSpawned(spawnedLifetime, clone));
             }
             
         }
     }
 
-    IEnumerator SpawnClusterItem(float time)
-    {
-        isSpawning = true;
-
-        yield return new WaitForSeconds(time);
-        
-        GameObject clone;
-        
-        isSpawning = false;
-
-        for (int i = 0; i < spawnLimit; i++)
-        {
-            clone = Instantiate(spawnedCluster, new Vector3(0, 0, 0), Quaternion.Euler(90, 0, 0));
-
-            clone.transform.SetParent(this.gameObject.transform);
-
-            launchSite = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0);
-
-            clone.transform.localPosition = launchSite;
-
-            clone.gameObject.SetActive(true);
-
-            StartCoroutine(KillSpawnedCluster(spawnedLifetime, clone));
-        }
-            
-    }
-
-    private IEnumerator KillSpawnedTargeter(float time, Rigidbody clone)
-    {
-        yield return new WaitForSeconds(time);
-        Destroy(clone.gameObject);
-
-    }
-    private IEnumerator KillSpawnedCluster(float time, GameObject clone)
+    private IEnumerator KillSpawned(float time, Rigidbody clone)
     {
         yield return new WaitForSeconds(time);
         Destroy(clone.gameObject);

@@ -4,7 +4,7 @@ public class BulletControls : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Flame") || other.CompareTag("Fire Cluster Spawned"))
+        if (other.CompareTag("Flame"))
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
