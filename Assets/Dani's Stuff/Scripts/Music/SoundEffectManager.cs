@@ -10,14 +10,13 @@ public class SoundEffectManager : MonoBehaviour
     //Each step when moving the Volume Left & Right
     public float step = 0.1f;
     //Call setup & ingame gameobject
-    //private SetupDefaults MainMenu;
-    //private PauseMenu InGame;
     //MyScript myObject = FindObjectOfType<MyScript>();
     SetupDefaults MainMenu = FindAnyObjectByType<SetupDefaults>();
+    //SetupDefaults MainMenu;
+    PauseMenu InGame = FindAnyObjectByType<PauseMenu>();
     
     private void Awake()
     {
-
         //instance 
         if (instance == null)
         {
@@ -43,6 +42,8 @@ public class SoundEffectManager : MonoBehaviour
     }
     void Start()
     {
+        //call gameobject, please work
+
         sfxSlider.onValueChanged.AddListener(delegate { OnValueChanged(); });
     }
 
@@ -61,6 +62,7 @@ public class SoundEffectManager : MonoBehaviour
                 sfxSlider.interactable = false;
             }
         }
+
         else
 
         if (sfxSlider.interactable == true)
