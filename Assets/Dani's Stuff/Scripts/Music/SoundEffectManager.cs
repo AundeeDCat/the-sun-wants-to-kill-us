@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,14 +6,19 @@ public class SoundEffectManager : MonoBehaviour
     private static SoundEffectManager instance;
     private static AudioSource AudioSource;
     private static SoundEffectLibrary library;
-    [SerializeField] private Slider sfxSlider;
-    //Input Variables
+    public Slider sfxSlider;
+    //Each step when moving the Volume Left & Right
     public float step = 0.1f;
-    //gameobject
-    public GameObject sfx;
+    //Call setup & ingame gameobject
+    //private SetupDefaults MainMenu;
+    //private PauseMenu InGame;
+    //MyScript myObject = FindObjectOfType<MyScript>();
+    SetupDefaults MainMenu = FindAnyObjectByType<SetupDefaults>();
+    
     private void Awake()
     {
-        //instance call
+
+        //instance 
         if (instance == null)
         {
             instance = this;
@@ -27,7 +30,7 @@ public class SoundEffectManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
     }
 
     public static void Play(string soundName)
@@ -45,8 +48,22 @@ public class SoundEffectManager : MonoBehaviour
 
     void Update()
     {
-        //input ctrl
-        if (sfx.activeSelf)
+        //check if scripts are active
+        if (gameObject.GetComponent<SettingsOption>().enabled == true || gameObject.GetComponent<PauseMenu>().enabled == true)
+        {
+            //checks if gameobject is active;
+            if (MainMenu.isActiveAndEnabled || InGame.isActiveAndEnabled)
+            {
+                sfxSlider.interactable = true;
+            }
+            else if (!MainMenu.isActiveAndEnabled || !InGame.isActiveAndEnabled)
+            {
+                sfxSlider.interactable = false;
+            }
+        }
+        else
+
+        if (sfxSlider.interactable == true)
         {
             if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             {
