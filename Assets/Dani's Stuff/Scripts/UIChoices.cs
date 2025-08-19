@@ -143,6 +143,8 @@ public class UIChoices : MonoBehaviour
                 //fade wait for one second
                 new WaitForSeconds(1);
                 SceneManager.LoadScene("SampleScene");
+                gameObject.GetComponent<UIChoices>().enabled = false;
+                gameObject.GetComponent<SettingsOption>().enabled = false;
                 break;
         }
     }

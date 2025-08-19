@@ -8,8 +8,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject Menu, SFX, BGM;
     private int Options = 5;
     private int selectedOpt;
-    //pause
-    public static bool gameIsPaused;
+
 
 
     void Start()
@@ -24,7 +23,7 @@ public class PauseMenu : MonoBehaviour
         choice1.color = new Color32(200, 236, 115, 120);
         choice2.color = new Color32(200, 236, 115, 120);
         choice3.color = new Color32(200, 236, 115, 120);
-        choice3.color = new Color32(200, 236, 115, 120);
+        choice4.color = new Color32(200, 236, 115, 120);
         SFX.SetActive(false);
         BGM.SetActive(false);
     }
@@ -48,10 +47,6 @@ public class PauseMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Menu.activeSelf)
-            {
-                Menu.SetActive(false);
-            }
             if (SFX.activeSelf)
             {
                 SFX.SetActive(false);
@@ -60,23 +55,6 @@ public class PauseMenu : MonoBehaviour
             {
                 BGM.SetActive(false);
             }
-            gameIsPaused = !gameIsPaused;
-            SoundEffectManager.Play("Pause");
-            PauseGame();
-        }
-    }
-
-    public void PauseGame()
-    {
-        if (gameIsPaused)
-        {
-            Time.timeScale = 0f;
-            Menu.SetActive(true);
-        }
-        else
-        {
-            Time.timeScale = 1;
-            Menu.SetActive(false);
         }
     }
 
