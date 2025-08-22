@@ -11,12 +11,16 @@ public class SoundEffectManager : MonoBehaviour
     public float step = 0.1f;
     //Call setup & ingame gameobject
     //MyScript myObject = FindObjectOfType<MyScript>();
-    SetupDefaults MainMenu = FindAnyObjectByType<SetupDefaults>();
+    SetupDefaults MainMenu;
     //SetupDefaults MainMenu;
-    PauseMenu InGame = FindAnyObjectByType<PauseMenu>();
+    PauseMenu InGame;
     
     private void Awake()
     {
+        //FindObject on wake
+        MainMenu = FindAnyObjectByType<SetupDefaults>();
+        InGame = FindAnyObjectByType<PauseMenu>();
+
         //instance 
         if (instance == null)
         {
